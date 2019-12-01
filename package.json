@@ -1,0 +1,44 @@
+{
+  "name": "hrmsystem-backend",
+  "version": "0.0.1",
+  "description": "The backend for a human resource management system",
+  "main": "./src/app.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "start": "node ./src/bin/www",
+    "test": "mocha ./tests/*",
+    "nodemon": "nodemon ./src/bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "ejs": "^3.0.1",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/greatwhitesharks/hrmsystem.git"
+  },
+  "keywords": [
+    "hrm",
+    "human",
+    "resource",
+    "managment",
+    "pim"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/greatwhitesharks/hrmsystem/issues"
+  },
+  "homepage": "https://github.com/greatwhitesharks/hrmsystem#readme",
+  "devDependencies": {
+    "errorhandler": "^1.5.1",
+    "nodemon": "^2.0.1"
+  }
+}
