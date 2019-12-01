@@ -1,4 +1,5 @@
 # Human Resource Managment System Project
+![size badge](https://img.shields.io/github/repo-size/greatwhitesharks/HRMSystem)
 
 Human Resource Managment System made for CS 3042 group project
 
@@ -19,10 +20,10 @@ Human Resource Managment System made for CS 3042 group project
   - [ ] Employee reports grouped by job title, department, pay grade etc.
   - [ ] Reports based on custom fields (should contain at least 2 custom fields created beforehand)
 
-## Building With
+## Technologies
 
 * [Express](https://expressjs.com/) - The web framework used
 * [NPM](https://www.npmjs.com/get-npm/) - Package Management
-* [MySql](https://www.mysql.com//) - Database
+* [MySql](https://www.mysql.com/) - Database System
 
 ## Authors
