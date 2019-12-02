@@ -2,6 +2,12 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
+
+// load configuration data from the .env file
+require('dotenv').config({
+  path : './src/.env'
+});
+
 var indexRouter = require('./routes/index');
 
 var app = express();
