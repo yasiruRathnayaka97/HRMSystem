@@ -20,6 +20,10 @@ Human Resource Managment System made for CS 3042 group project
   - [ ] Employee reports grouped by job title, department, pay grade etc.
   - [ ] Reports based on custom fields (should contain at least 2 custom fields created beforehand)
 
+## ERD
+
+![ERD](./docs/ERD/ERD.png)
+
 ## Technologies
 
 * [Express](https://expressjs.com/) - The web framework used
