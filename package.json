@@ -41,6 +41,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "errorhandler": "^1.5.1",
+    "eslint": "^6.7.2",
     "mocha": "^6.2.2",
     "nodemon": "^2.0.1"
   }

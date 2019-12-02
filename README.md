@@ -3,6 +3,12 @@
 
 Human Resource Managment System made for CS 3042 group project
 
+## Running the code
+
+1. Clone this repository
+2. run `npm install`
+3. run `npm run nodemon` to start the server 
+
 ## Functional Requirements
 
 - [ ] HR admin should be able to add employee data to the system
