@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  form(action="/", method="POST")
+    input(name="user_job" type="text", placeholder="job Title")
+    button(type="submit") Submit
