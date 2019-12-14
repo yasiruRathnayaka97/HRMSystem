@@ -43,7 +43,15 @@ class BaseRepository {
       sql += ` limit ${limit}`;
     }
     const result = await this.db.execute(sql, flat);
-    return result[0][0];
+    return result[0];
+  }
+
+  /**
+   *
+   * @param {*} queryObject
+   */
+  async findOne(queryObject) {
+    return (await this.find(queryObject, 1))[0];
   }
 
   /**
