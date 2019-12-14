@@ -19,15 +19,15 @@ class AddressRepository extends BaseRepository {
   async save(address) {
     //  TODO:Remove error after test
 
-    const result = await this.db(`Select SAVE_ADDRESS(?,?,?,?,?) as id`, [
+    const result = await this.db.execute(`Select SAVE_ADDRESS(?,?,?,?,?,?) as id`, [
+      address.id || null,
       address.line1,
       address.line2,
       address.city,
       address.region,
       address.country,
     ]);
-
-    return result;
+    return result[0][0];
   }
 
   /**
@@ -36,8 +36,8 @@ class AddressRepository extends BaseRepository {
    * @param {*} employee
    */
   async addAddressToEmployee(address, employee) {
-    return await this.db(`INSERT INTO employee_record_has_address 
-    VALUES(${employee.id}, ${address.id});`);
+    return await this.db.execute(`INSERT INTO employee_record_has_address 
+    VALUES(${employee}, ${address});`);
   };
 
   /**
@@ -46,9 +46,9 @@ class AddressRepository extends BaseRepository {
    * @param {*} employee
    */
   async removeAddressFromEmployee(address, employee) {
-    return await this.db(`DELETE FROM employee_record_has_address WHERE 
-    employee_record_id = ${employee.id} AND address_id =${address.id};`);
+    return await this.db.execute(`DELETE FROM employee_record_has_address WHERE 
+    employee_record_id = ${employee} AND address_id =${address};`);
   }
 }
 
-export default AddressRepository;
+module.exports = AddressRepository;
