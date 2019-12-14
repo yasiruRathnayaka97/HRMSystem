@@ -9,6 +9,9 @@ require('dotenv').config({
 });
 
 const indexRouter = require('./routes/index');
+const recordRouter = require('./routes/record');
+const accountRouter = require('./routes/account');
+const leaveRouter = require('./routes/record');
 
 const app = express();
 
@@ -21,6 +24,9 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 app.use('/', indexRouter);
+app.use('/record', recordRouter);
+app.use('/account', accountRouter);
+app.use('/absence', leaveRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
