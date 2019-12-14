@@ -6,7 +6,7 @@ beforeAll(async (done)=>{
   done();
 });
 
-const EmployeeRecordRepository = require('../../../src/models/EmployeeRecord/employeeRecord.repository');
+const EmployeeRecordRepository = require('../../../src/repositories/employeeRecord.repository');
 const employeeRecordRepository = new EmployeeRecordRepository(pool);
 var id;
 

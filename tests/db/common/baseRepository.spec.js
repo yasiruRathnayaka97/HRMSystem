@@ -54,14 +54,14 @@ describe('Test methods of the base repository', ()=>{
   test('find method returns empty array if the no record equaling the'+
   ' given parameters found', async (done)=>{
     const result = await baseRepository.find({name: 'empty'});
-    expect(result[0]).toEqual([]);
+    expect(result).toEqual([]);
     done();
   });
 
   test('find metod returns an array of tuples if the records ' +
   'equaling the given parameters are found', async (done)=>{
     const result = await baseRepository.find({id: 1, name: 'entity1'});
-    expect(result[0]).toEqual([{id: 1, name: 'entity1'}]);
+    expect(result).toEqual([{id: 1, name: 'entity1'}]);
     done();
   });
 });
