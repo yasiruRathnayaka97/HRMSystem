@@ -2,7 +2,10 @@
  * Absence Service
  */
 const AbsenceRepository = require('../repositories/absence.repository');
+const EmployeeRecordService =
+  require('../services/employeeRecord.service');
 const Absence = require('../models/absence.model');
+
 /**
  *
  */
@@ -21,6 +24,7 @@ class AbsenceService {
    */
   async getById(id) {
     const absenceRepo = new AbsenceRepository(db);
+
     const result = await absenceRepo.find({
       id: id,
     });
@@ -28,32 +32,49 @@ class AbsenceService {
   }
 
   /**
-   * Approve leave by supervisor
-   * @param {Absence} leave
-   * @param {EmployeeRecord} supervisor
+   * Attempts to approve leave using supervisorId
+   * @param {Number} leaveId
+   * @param {Number} supervisorId
    * @return {Absence} leave
+   * @throws 
    */
-  async approveLeave(leave, supervisor) {
+  async approveLeave(leaveId, supervisorId) {
     const absenceRepo = new AbsenceRepository(db);
-    leave.supervisor = supervisor;
-    leave.status = 'approved';
-    await absenceRepo.save(leave);
-    return leave;
+    const leave = this.getById(leaveId);
+    const employee = EmployeeRecordService.getById(supervisorId);
+
+    if (employee.supervisorId === supervisorId) {
+      leave.supervisor = supervisorId;
+      leave.status = 'approved';
+      await absenceRepo.save(leave);
+      return leave;
+    } else {
+      throw new Error('Provided supervisorId does not belong to supervisor');
+    }
   }
 
   /**
-   * Decline leave by supervisor
-   * @param {Absence} leave
-   * @param {EmployeeRecord} supervisor
+   * Attempts to decline leave usin
+   * @param {Number} leaveId
+   * @param {Number} supervisorId
    * @return {Absence} leave
    */
-  async declineLeave(leave, supervisor) {
+  async declineLeave(leaveId, supervisorId) {
+    const leave = this.getById(leaveId);
+    const employee = EmployeeRecordService.getById(supervisorId);
+
     const absenceRepo = new AbsenceRepository(db);
-    leave.supervisor = supervisor;
-    leave.status = 'declined';
-    await absenceRepo.save(leave);
-    return leave;
+
+    if (employee.supervisorId === supervisorId) {
+      leave.supervisor = supervisorId;
+      leave.status = 'declined';
+      await absenceRepo.save(leave);
+      return leave;
+    } else {
+      throw new Error('Provided supervisorId does not belong to supervisor');
+    }
+
   }
 }
 
-export default AbsenceService;
+module.exports = AbsenceService;

@@ -29,10 +29,15 @@ class EmployeeRecordService {
     // Insert employee record
     const recordRepo = new EmployeeRecordRepository(this.db);
 
-    data.id = await recordRepo.save(data).insertId;
+    data.id = (await recordRepo.save(data))[0].insertId;
+
+
     // TODO : Do the filtering here not in the repository
     const customRepo = new CustomAttributeValueRepository(this.db);
-    const attributes = await customRepo.createMany(record.id, custom);
+    let attributes = {};
+    if (Object.keys(custom).length) {
+      attributes = await customRepo.createMany(data.id, custom);
+    }
 
     const employee = {};
 
@@ -77,4 +82,4 @@ class EmployeeRecordService {
   }
 }
 
-export default EmployeeRecordService;
+module.exports = EmployeeRecordService;

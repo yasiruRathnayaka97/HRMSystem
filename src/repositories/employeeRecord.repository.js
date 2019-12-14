@@ -18,6 +18,7 @@ class EmployeeRecordRepository extends BaseRepository {
    * @param {*} object
    */
   async save(object) {
+
     return await this.db.execute(`INSERT into ${this.table} (
       id,
       first_name,
@@ -55,11 +56,11 @@ class EmployeeRecordRepository extends BaseRepository {
       object.employmentType,
       object.jobTitle,
       object.paygrade,
-      object.supervisor.id || null,
+      object.supervisorId,
       object.birthday,
       object.photo,
       object.salary,
-      object.department.id,
+      object.departmentId,
     ]);
   }
   /**
@@ -70,4 +71,4 @@ class EmployeeRecordRepository extends BaseRepository {
   }
 }
 
-export default EmployeeRecordRepository;
+module.exports = EmployeeRecordRepository;
