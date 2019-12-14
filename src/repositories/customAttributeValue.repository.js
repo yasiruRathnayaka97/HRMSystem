@@ -2,7 +2,7 @@ const BaseRepository = require('../db/common/baseRepository');
 const CustomAttributeRepository = require('./customAttribute.repository');
 const valueColumns = require('../helpers/customAttribute.helper').valueColumns;
 const prepareForInsert =
-  require('../helpers/attribute.helper').prepareForInsert;
+  require('../helpers/sql.helper').prepareForInsert;
 const camelCase = require('lodash').camelCase;
 
 /**
@@ -22,22 +22,25 @@ class CustomAttributeValueRepository extends BaseRepository {
    * @param {*} object
    */
   async createMany(recordId, object) {
-    query = prepareForInsert('custom_attribute_value',
+    if (!Object.keys(object).length) {
+      throw new Error('Given object is empty');
+    }
+    const query = prepareForInsert('custom_attribute_value',
         valueColumns,
-        objects.length,
+        Object.keys(object).length,
     );
-    object.name, object.value;
-    flat = [];
+
+    const flat = [];
 
     const attributeRepo = new CustomAttributeRepository(this.db);
     const attributes = await attributeRepo.getAttributes();
     for (const attribute of attributes) {
       flat.push(id, attribute, object[camelCase(attribute)]);
     }
-
+    (query);
     await this.db.execute(query, flat);
     return customAttributes;
   }
 }
 
-export default CustomAttributeValueRepository;
+module.exports = CustomAttributeValueRepository;
