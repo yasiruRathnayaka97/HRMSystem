@@ -12,4 +12,4 @@ class Dependent {
   }
 }
 
-export default Dependent;
+module.exports = Dependent;

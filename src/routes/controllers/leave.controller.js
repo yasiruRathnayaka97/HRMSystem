@@ -27,4 +27,4 @@ class LeaveController {
   }
 }
 
-export default LeaveController;
+module.exports = LeaveController;

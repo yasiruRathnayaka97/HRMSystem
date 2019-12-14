@@ -42,4 +42,4 @@ class EmployeeAccountService {
   }
 }
 
-export default EmployeeAccountService;
+module.exports = EmployeeAccountService;

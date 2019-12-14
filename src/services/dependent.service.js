@@ -32,4 +32,4 @@ class DependentService {
   }
 }
 
-export default DependentService;
+module.exports = DependentService;

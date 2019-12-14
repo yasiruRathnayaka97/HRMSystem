@@ -11,4 +11,4 @@ class Absence {
   }
 }
 
-export default Absence;
+module.exports = Absence;

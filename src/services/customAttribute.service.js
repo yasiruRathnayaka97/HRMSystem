@@ -21,6 +21,6 @@ class CustomAttributeService {
   }
 }
 
-export default CustomAttributeService;
+module.exports = CustomAttributeService;
 
 
