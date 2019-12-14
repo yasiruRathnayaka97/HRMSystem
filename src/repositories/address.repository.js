@@ -1,4 +1,4 @@
-import BaseRepository from '../db/common/baseRepository';
+const BaseRepository = require('../db/common/baseRepository');
 
 /**
  * Address Repository
@@ -19,7 +19,7 @@ class AddressRepository extends BaseRepository {
   async save(address) {
     //  TODO:Remove error after test
 
-    const result = await this.db(`Select SAVE_ADDRESS(?,?,?,?,?) as id`,[
+    const result = await this.db(`Select SAVE_ADDRESS(?,?,?,?,?) as id`, [
       address.line1,
       address.line2,
       address.city,

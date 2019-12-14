@@ -1,7 +1,6 @@
-import EmployeeAccountRepository from
-  '../repositories/employeeAccount.repository';
-import EmployeeAccount from
-  '../models/employeeRecord.model';
+const EmployeeAccountRepository =
+  require('../repositories/employeeAccount.repository');
+const EmployeeAccount = require('../models/employeeRecord.model');
 
 /**
  * Employee Account Service

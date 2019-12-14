@@ -1,5 +1,5 @@
-import LeaveService from '../../services/absence.service';
-import db from '../../db';
+const LeaveService = require('../../services/absence.service');
+const db = require('../../db');
 /**
  *
  */

@@ -1,16 +1,15 @@
 /**
  * Absence Service
  */
-import AbsenceRepository from
-  '../repositories/absence.repository';
-import Absence from '../models/absence.model';
+const AbsenceRepository = require('../repositories/absence.repository');
+const Absence = require('../models/absence.model');
 /**
  *
  */
 class AbsenceService {
   /**
    *
-   * @param {*} db
+   * @param {Object} db
    */
   constructor(db) {
     this.db = db;
@@ -18,7 +17,7 @@ class AbsenceService {
 
   /**
    *
-   * @param {*} id
+   * @param {Number} id
    */
   async getById(id) {
     const absenceRepo = new AbsenceRepository(db);
@@ -29,30 +28,30 @@ class AbsenceService {
   }
 
   /**
-   * Approve Leave by supervisor
+   * Approve leave by supervisor
    * @param {Absence} leave
    * @param {EmployeeRecord} supervisor
-   * @return {Objet} leave
+   * @return {Absence} leave
    */
-  approveLeave(leave, supervisor) {
+  async approveLeave(leave, supervisor) {
     const absenceRepo = new AbsenceRepository(db);
     leave.supervisor = supervisor;
     leave.status = 'approved';
-    absenceRepo.save(leave);
+    await absenceRepo.save(leave);
     return leave;
   }
 
   /**
-   * Decline Leave by supervisor
-   * @param {*} leave
-   * @param {*} supervisor
-   * @return {Objet} leave
+   * Decline leave by supervisor
+   * @param {Absence} leave
+   * @param {EmployeeRecord} supervisor
+   * @return {Absence} leave
    */
-  declineLeave(leave, supervisor) {
+  async declineLeave(leave, supervisor) {
     const absenceRepo = new AbsenceRepository(db);
     leave.supervisor = supervisor;
     leave.status = 'declined';
-    absenceRepo.save(leave);
+    await absenceRepo.save(leave);
     return leave;
   }
 }

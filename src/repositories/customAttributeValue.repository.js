@@ -1,8 +1,9 @@
-import BaseRepository from '../db/common/baseRepository';
-import CustomAttributeRepository from './customAttribute.repository';
-import {valueColumns} from '../helpers/customAttribute.helper';
-import {prepareForInsert} from '../helpers/attribute.helper';
-import {camelCase} from 'lodash';
+const BaseRepository = require('../db/common/baseRepository');
+const CustomAttributeRepository = require('./customAttribute.repository');
+const valueColumns = require('../helpers/customAttribute.helper').valueColumns;
+const prepareForInsert =
+  require('../helpers/attribute.helper').prepareForInsert;
+const camelCase = require('lodash').camelCase;
 
 /**
  * Custom Attribute Repository

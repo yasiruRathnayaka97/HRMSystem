@@ -1,4 +1,4 @@
-import BaseRepository from '../db/common/baseRepository';
+const BaseRepository = require('../db/common/baseRepository');
 
 /**
  * Employee Record Repository

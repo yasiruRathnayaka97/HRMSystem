@@ -1,5 +1,4 @@
-import LeaveController from './controllers/leave.controller';
-
+const LeaveController = require('./controllers/leave.controller');
 const express = require('express');
 const router = express.Router();
 

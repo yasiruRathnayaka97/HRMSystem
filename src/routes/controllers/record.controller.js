@@ -1,9 +1,10 @@
-
-import db from '../../db';
-import EmployeeRecordService from '../../services/employeeRecord.service';
-import CustomAttributeService from
-  '../../services/customAttribute.service';
-import camelCase from 'lodash';
+const db = require('../../db');
+const EmployeeRecordService = require('../../services/employeeRecord.service');
+const CustomAttributeService =
+  require('../../services/customAttribute.service');
+const AddressRepository = require('../../repositories/address.repository');
+const camelCase = require('lodash');
+const DependentRepository = require('../../repositories/dependent.repository');
 /**
  *
  */
@@ -44,7 +45,7 @@ class RecordController {
     // Create record
     const recordService = new EmployeeRecordService(db);
 
-    recordService.create({
+    const record = await recordService.create({
       firstName,
       middleName,
       lastName,
@@ -59,11 +60,43 @@ class RecordController {
       departmentId,
     }, {
       custom,
-    }).then((record) =>{
-      return res.json(record);
-    }).catch((err) =>{
-      return res.json({err: error});
     });
+
+    const addressRepo = new AddressRepository(db);
+    // Code for a single address
+    const {
+      line1,
+      line2,
+      city,
+      region,
+      country,
+    } = req.body;
+
+    const address = {
+      line1,
+      line2,
+      city,
+      region,
+      country,
+    };
+
+    await addressRepo.save(address);
+    await addressRepo.addAddressToEmployee(address, record);
+
+    //  Code to add dependent information
+    dependents = [];
+    for (const dependent of req.body.dependents) {
+      dependents.push({
+        firstName: dependent.firstName,
+        middleName: dependent.middleName || '',
+        lastName: dependent.lastName,
+        birthday: dependent.birthday,
+        relation: dependent.relation,
+      });
+    }
+
+    const dependentRepo = new DependentRepository(db);
+    dependentRepo.createMany(dependents);
   }
 }
 

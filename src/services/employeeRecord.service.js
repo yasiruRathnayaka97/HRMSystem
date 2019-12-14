@@ -1,14 +1,12 @@
 /**
  * Employee Record Service
  */
-import EmployeeRecordRepository from
-  '../repositories/employeeRecord.repository';
-
-import CustomAttributeValueRepository from
-  '../repositories/customAttributeValue.repository';
-import EmployeeRecord from
-  '../models/employeeRecord.model';
-import {camelCase} from 'lodash';
+const EmployeeRecordRepository =
+  require('../repositories/employeeRecord.repository');
+const CustomAttributeValueRepository =
+  require('../repositories/customAttributeValue.repository');
+const EmployeeRecord = require('../models/employeeRecord.model');
+const camelCase = require('lodash').camelCase;
 /**
  *
  */
@@ -31,8 +29,7 @@ class EmployeeRecordService {
     // Insert employee record
     const recordRepo = new EmployeeRecordRepository(this.db);
 
-    const record = await recordRepo.save(data);
-
+    data.id = await recordRepo.save(data).insertId;
     // TODO : Do the filtering here not in the repository
     const customRepo = new CustomAttributeValueRepository(this.db);
     const attributes = await customRepo.createMany(record.id, custom);

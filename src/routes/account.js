@@ -1,5 +1,4 @@
-import AccountController from './controllers/account.controller';
-
+const AccountController = require('./controllers/account.controller');
 const express = require('express');
 const router = express.Router();
 

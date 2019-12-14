@@ -1,5 +1,4 @@
-import RecordController from './controllers/record.controller';
-
+const RecordController = require('./controllers/record.controller');
 const express = require('express');
 const router = express.Router();
 

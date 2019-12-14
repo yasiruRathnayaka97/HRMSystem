@@ -1,5 +1,6 @@
-import EmployeeAccountService from '../../services/employeeAccount.service';
-import db from '../../db';
+const EmployeeAccountService =
+  require('../../services/employeeAccount.service');
+const db = require('../../db');
 /**
  *
  */

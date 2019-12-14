@@ -1,6 +1,5 @@
-import CustomAttributeRepository from
-  '../repositories/customAttribute.repository';
-
+const CustomAttributeRepository =
+  require('../repositories/customAttribute.repository');
 /**
  * Custom Attribute Service
  */
