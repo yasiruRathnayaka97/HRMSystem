@@ -1,5 +1,5 @@
 const BaseRepository = require('../db/common/baseRepository');
-const {sqlHelper} = require('../helpers/sql.helper');
+const sqlHelper = require('../helpers/sql.helper');
 const {snakeCase} = require('lodash');
 
 /**
@@ -13,7 +13,7 @@ class DependentRepository extends BaseRepository {
   constructor(db) {
     super(db, 'dependent_information');
   }
-
+  
   /**
    *
    * @param {Dependent[]} dependents
@@ -31,8 +31,8 @@ class DependentRepository extends BaseRepository {
       flat.push(...Object.values(dependent));
     }
 
-    return await his.db.execute(sql, flat);
+    return await this.db.execute(sql, flat);
   }
 }
 
-export default DependentRepository;
+module.exports = DependentRepository;
