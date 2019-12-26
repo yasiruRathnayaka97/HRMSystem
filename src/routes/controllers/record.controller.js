@@ -3,7 +3,7 @@ const EmployeeRecordService = require('../../services/employeeRecord.service');
 const CustomAttributeService =
   require('../../services/customAttribute.service');
 const AddressRepository = require('../../repositories/address.repository');
-const camelCase = require('lodash');
+const {camelCase} = require('lodash');
 const DependentRepository = require('../../repositories/dependent.repository');
 /**
  *
