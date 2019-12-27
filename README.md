@@ -37,5 +37,3 @@ Human Resource Managment System made for CS 3042 group project
 * [MySql](https://www.mysql.com/) - Database System
 
 ## Authors
-
-Test

@@ -12,6 +12,7 @@ const indexRouter = require('./routes/index');
 const recordRouter = require('./routes/record');
 const accountRouter = require('./routes/account');
 const leaveRouter = require('./routes/record');
+const adminaccountRouter = require('./routes/admin/account');
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use(express.urlencoded({extended: false}));
 app.use('/', indexRouter);
 app.use('/record', recordRouter);
 app.use('/account', accountRouter);
+app.use('/changejob', adminaccountRouter);
 app.use('/absence', leaveRouter);
 
 // catch 404 and forward to error handler
