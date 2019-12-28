@@ -23,6 +23,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
+app.use(express.static('../web/public'));
 app.use('/', indexRouter);
 app.use('/record', recordRouter);
 app.use('/account', accountRouter);

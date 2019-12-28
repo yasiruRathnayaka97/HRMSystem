@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node ./src/bin/www",
     "test": "jest ./tests/* --verbose",
-    "nodemon": "nodemon ./src/bin/www"
+    "nodemon": "npx nodemon ./src/bin/www"
   },
   "dependencies": {
     "bluebird": "^3.7.2",
@@ -19,6 +19,7 @@
     "dotenv": "^8.2.0",
     "ejs": "^3.0.1",
     "express": "~4.16.1",
+    "express-ejs-layouts": "^2.5.0",
     "http-errors": "~1.6.3",
     "lodash": "^4.17.15",
     "morgan": "~1.9.1",
