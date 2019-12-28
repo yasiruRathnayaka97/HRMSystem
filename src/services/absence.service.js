@@ -29,7 +29,7 @@ class AbsenceService {
     const result = await absenceRepo.find({
       id: id,
     });
-    
+
     const data = {};
 
     // Convet snake_case properties to camelCase
@@ -49,9 +49,8 @@ class AbsenceService {
   async approveLeave(leaveId, requesterId) {
     const absenceRepo = new AbsenceRepository(db);
     const leave = this.getById(leaveId);
-    const employee = EmployeeRecordService.getById(leave.employeeRecordId);
 
-    if (canModifyLeaveState(leave, requesterId) {
+    if (canModifyLeaveState(leave, requesterId)) {
       leave.supervisor = requesterId;
       leave.status = 'approved';
       await absenceRepo.save(leave);
@@ -69,7 +68,6 @@ class AbsenceService {
    */
   async declineLeave(leaveId, requesterId) {
     const leave = this.getById(leaveId);
-  
     const absenceRepo = new AbsenceRepository(db);
 
     if (this.canApproveDeclineLeave(leave, requesterId)) {
@@ -84,24 +82,34 @@ class AbsenceService {
 
   /**
    * Check if the requester with {requesterID} can approve/decline leave
-   * @param {Absence} leave 
-   * @param {Number} requesterId 
+   * @param {Absence} leave
+   * @param {Number} requesterId
    */
-  async canApproveDeclineLeave(leave, requesterId){
+  async canApproveDeclineLeave(leave, requesterId) {
     const employee = EmployeeRecordService.getById(leave.employeeRecordId);
     return (employee.supervisorId === requesterId);
   }
-  async getLeaveInfo(supervisorId){
-      availableLeave=getPaygradeLeaveCount(leaveId) - getTakenLeavesValue(leaveId);
-              
-      //TODO IMPLEMENT LEAVE INFO RETRIEVE
-      return leveInfo;
-  }
-  async getLeaveStatus(employeeRecordId){
-    var attr="status";
-    const absenceRepo = new AbsenceRepository(this.db);
-    return await absenceRepo.findOneByOne(attr,employeeRecordId);
 
+  /**
+   *
+   * @param {*} supervisorId
+   */
+  async getLeaveInfo(supervisorId) {
+    availableLeave = getPaygradeLeaveCount(leaveId) -
+      getTakenLeavesValue(leaveId);
+
+    // TODO IMPLEMENT LEAVE INFO RETRIEVE
+    return leveInfo;
+  }
+
+  /**
+   *
+   * @param {*} employeeRecordId
+   */
+  async getLeaveStatus(employeeRecordId) {
+    const attr='status';
+    const absenceRepo = new AbsenceRepository(this.db);
+    return await absenceRepo.findOneByOne(attr, employeeRecordId);
   }
 }
 
