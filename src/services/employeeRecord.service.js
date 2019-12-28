@@ -6,7 +6,10 @@ const EmployeeRecordRepository =
 const CustomAttributeValueRepository =
   require('../repositories/customAttributeValue.repository');
 const EmployeeRecord = require('../models/employeeRecord.model');
-const camelCase = require('lodash').camelCase;
+const Address = require('../models/address.model');
+const DependentService = require('../services/dependent.service');
+const AddressRepository = require('../repositories/address.repository');
+const {camelCase} = require('lodash');
 /**
  *
  */
@@ -54,19 +57,20 @@ class EmployeeRecordService {
   async getById(id) {
     const recordRepo = new EmployeeRecordRepository(this.db);
 
-    const result = await recordRepo.find(
+    const result = await recordRepo.findOne(
         {
           id,
         },
     );
 
-    employee = new EmployeeRecord({});
+    const employee = {};
 
     if (result) {
       Object.assign(employee, result);
 
       // Populate the custom attributes
-      const attributes = await CustomAttributeValueRepository.find({
+      const customAttribValRepo = new CustomAttributeValueRepository(this.db);
+      const attributes = await customAttribValRepo.find({
         employee_record_id: id,
       });
 
@@ -74,11 +78,31 @@ class EmployeeRecordService {
         employee[camelCase(attribute.attribute_name)] = attribute.value;
       }
 
-      Object.seal(employee);
-      return employee;
+
+      const ds = new DependentService(this.db);
+      employee.dependents = await ds.getDependents(id);
+      employee.addresses = await this.getAddresses(id);
+      return new EmployeeRecord(employee);
     } else {
       // Throw error
     }
+  }
+
+  /**
+  *
+  * @param {*} recordId
+  */
+  async getAddresses(recordId) {
+    const repository = new AddressRepository(this.db);
+    const results = await repository.getAddresses(recordId);
+    const addresses = [];
+
+    for (const result of results) {
+      addresses.push(
+          new Address(result),
+      );
+    }
+    return addresses;
   }
 }
 
