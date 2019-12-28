@@ -5,7 +5,7 @@ const AbsenceRepository = require('../repositories/absence.repository');
 const EmployeeRecordService =
   require('../services/employeeRecord.service');
 const Absence = require('../models/absence.model');
-
+const {camelCase} = require('lodash');
 /**
  *
  */
@@ -25,10 +25,18 @@ class AbsenceService {
   async getById(id) {
     const absenceRepo = new AbsenceRepository(db);
 
+    // Find the absence object with id
     const result = await absenceRepo.find({
       id: id,
     });
-    return new Absence(result[0][0]);
+    
+    const data = {};
+
+    // Convet snake_case properties to camelCase
+    for (const key of Object.keys(result[0][0])) {
+      data[camelCase(key)] = data[key];
+    }
+    return new Absence(data);
   }
 
   /**
