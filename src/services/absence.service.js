@@ -34,17 +34,17 @@ class AbsenceService {
   /**
    * Attempts to approve leave using supervisorId
    * @param {Number} leaveId
-   * @param {Number} supervisorId
+   * @param {Number} requesterId
    * @return {Absence} leave
-   * @throws 
+   * @throws
    */
-  async approveLeave(leaveId, supervisorId) {
+  async approveLeave(leaveId, requesterId) {
     const absenceRepo = new AbsenceRepository(db);
     const leave = this.getById(leaveId);
-    const employee = EmployeeRecordService.getById(supervisorId);
+    const employee = EmployeeRecordService.getById(leave.employeeRecordId);
 
-    if (employee.supervisorId === supervisorId) {
-      leave.supervisor = supervisorId;
+    if (canModifyLeaveState(leave, requesterId) {
+      leave.supervisor = requesterId;
       leave.status = 'approved';
       await absenceRepo.save(leave);
       return leave;
@@ -56,24 +56,32 @@ class AbsenceService {
   /**
    * Attempts to decline leave usin
    * @param {Number} leaveId
-   * @param {Number} supervisorId
+   * @param {Number} requesterId
    * @return {Absence} leave
    */
-  async declineLeave(leaveId, supervisorId) {
+  async declineLeave(leaveId, requesterId) {
     const leave = this.getById(leaveId);
-    const employee = EmployeeRecordService.getById(supervisorId);
-
+  
     const absenceRepo = new AbsenceRepository(db);
 
-    if (employee.supervisorId === supervisorId) {
-      leave.supervisor = supervisorId;
+    if (this.canApproveDeclineLeave(leave, requesterId)) {
+      leave.supervisor = requesterId;
       leave.status = 'declined';
       await absenceRepo.save(leave);
       return leave;
     } else {
       throw new Error('Provided supervisorId does not belong to supervisor');
     }
+  }
 
+  /**
+   * Check if the requester with {requesterID} can approve/decline leave
+   * @param {Absence} leave 
+   * @param {Number} requesterId 
+   */
+  async canApproveDeclineLeave(leave, requesterId){
+    const employee = EmployeeRecordService.getById(leave.employeeRecordId);
+    return (employee.supervisorId === requesterId);
   }
 }
 
