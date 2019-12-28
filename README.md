@@ -7,7 +7,8 @@ Human Resource Managment System made for CS 3042 group project
 
 1. Clone this repository
 2. run `npm install`
-3. run `npm run nodemon` to start the server 
+3. rename .env.sample to .env and enter your db info
+4. run `npm run nodemon` to start the server 
 
 ## Functional Requirements
 
