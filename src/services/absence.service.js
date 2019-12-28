@@ -54,7 +54,7 @@ class AbsenceService {
   }
 
   /**
-   * Attempts to decline leave usin
+   * Attempts to decline leave using
    * @param {Number} leaveId
    * @param {Number} supervisorId
    * @return {Absence} leave
@@ -73,6 +73,18 @@ class AbsenceService {
     } else {
       throw new Error('Provided supervisorId does not belong to supervisor');
     }
+
+  }
+  async getLeaveInfo(supervisorId){
+      availableLeave=getPaygradeLeaveCount(leaveId) - getTakenLeavesValue(leaveId);
+              
+      //TODO IMPLEMENT LEAVE INFO RETRIEVE
+      return leveInfo;
+  }
+  async getLeaveStatus(employeeRecordId){
+    var attr="status";
+    const absenceRepo = new AbsenceRepository(this.db);
+    return await absenceRepo.findOneByOne(attr,employeeRecordId);
 
   }
 }
