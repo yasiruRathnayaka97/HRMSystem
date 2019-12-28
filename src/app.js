@@ -11,8 +11,7 @@ require('dotenv').config({
 const indexRouter = require('./routes/index');
 const recordRouter = require('./routes/record');
 const accountRouter = require('./routes/account');
-const leaveRouter = require('./routes/record');
-
+const leaveRouter = require('./routes/leave');
 const app = express();
 
 // view engine setup
