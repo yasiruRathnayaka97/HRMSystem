@@ -80,6 +80,9 @@ class EmployeeRecordService {
       // Throw error
     }
   }
+  async changeJob(id,job){
+     
+  }
 }
 
 module.exports = EmployeeRecordService;
