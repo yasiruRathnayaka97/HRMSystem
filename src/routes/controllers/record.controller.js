@@ -32,6 +32,7 @@ class RecordController {
         photo,
         salary,
         departmentId,
+        sex,
       } = req.body;
       // Extract custom attributes from request
       const attribService = new CustomAttributeService(db);
@@ -59,6 +60,7 @@ class RecordController {
         photo,
         salary,
         departmentId,
+        sex,
       },
       custom,
       );
@@ -92,7 +94,7 @@ class RecordController {
             firstName: dependent.firstName,
             middleName: dependent.middleName || '',
             lastName: dependent.lastName,
-            birthday: dependent.birthday,
+            birthdate: dependent.birthday,
             relation: dependent.relation,
             employeeRecordId: record.id,
           });
@@ -105,6 +107,17 @@ class RecordController {
     })()
         .then((record) => res.json({id: record.id}))
         .catch((e)=>res.json({error: e}));
+  }
+
+  /**
+   *
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
+   */
+  static async view(req, res, next) {
+    const recordService = new EmployeeRecordService(db);
+    res.json((await recordService.getById(req.params.id)));
   }
 }
 

@@ -18,7 +18,6 @@ class EmployeeRecordRepository extends BaseRepository {
    * @param {*} object
    */
   async save(object) {
-
     return await this.db.execute(`INSERT into ${this.table} (
       id,
       first_name,
@@ -31,8 +30,8 @@ class EmployeeRecordRepository extends BaseRepository {
       supervisor_id,
       birthdate,
       employee_photo,
-      salary,
-      department_id
+      department_id,
+      sex
     ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) 
     ON DUPLICATE KEY UPDATE
     first_name = VALUES(first_name),
@@ -45,8 +44,8 @@ class EmployeeRecordRepository extends BaseRepository {
     supervisor_id = VALUES(supervisor_id),
     birthdate = VALUES(birthdate),
     employee_photo = VALUES(employee_photo),
-    salary = VALUES(salary),
-    department_id = VALUES(department_id)
+    department_id = VALUES(department_id),
+    sex = VALUES(sex)
     `, [
       object.id || null,
       object.firstName,
@@ -59,8 +58,8 @@ class EmployeeRecordRepository extends BaseRepository {
       object.supervisorId,
       object.birthday,
       object.photo,
-      object.salary,
       object.departmentId,
+      object.sex,
     ]);
   }
   /**
