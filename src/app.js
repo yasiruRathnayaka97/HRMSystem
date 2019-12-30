@@ -13,21 +13,20 @@ require('dotenv').config({
 const indexRouter = require('./routes/index');
 const recordRouter = require('./routes/record');
 const accountRouter = require('./routes/account');
-
-const adminaccountRouter = require('./routes/admin/account');
+const jobRouter = require('./routes/job');
 const leaveRouter = require('./routes/leave');
 
 // Routes for the frontend
-const frontendRouter = require('./routes/frontend');
+//const frontendRouter = require('./routes/frontend');
 
 const app = express();
 
 // view engine setup
-const expressLayouts = require('express-ejs-layouts');
+//const expressLayouts = require('express-ejs-layouts');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.use(expressLayouts);
+//app.use(expressLayouts);
 
 // Don't use a layout by default
 app.set('layout', false);
@@ -44,11 +43,12 @@ app.use(express.static(
 
 
 app.use('/', indexRouter);
-app.use('/', frontendRouter);
+//app.use('/', frontendRouter);
 
 app.use('/record', recordRouter);
 app.use('/account', accountRouter);
-app.use('/changejob', adminaccountRouter);
+app.use('/addjob', jobRouter);
+app.use('/removejob', jobRouter);
 app.use('/absence', leaveRouter);
 
 // catch 404 and forward to error handler
