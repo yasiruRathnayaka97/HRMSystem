@@ -8,22 +8,42 @@ require('dotenv').config({
   path: path.join(__dirname, 'src/.env'),
 });
 
+// Routes for the "api" endpoints
+// Todo: Bundle these routes to a single file
 const indexRouter = require('./routes/index');
 const recordRouter = require('./routes/record');
 const accountRouter = require('./routes/account');
 const leaveRouter = require('./routes/leave');
+
+// Routes for the frontend
+const frontendRouter = require('./routes/frontend');
+
 const app = express();
 
 // view engine setup
+const expressLayouts = require('express-ejs-layouts');
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.use(expressLayouts);
+
+// Don't use a layout by default
+app.set('layout', false);
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
-app.use(express.static('../web/public'));
+app.use(express.static(
+    path.normalize(
+        path.join(__dirname, '../web/public'),
+    ),
+));
+
+
 app.use('/', indexRouter);
+app.use('/', frontendRouter);
+
 app.use('/record', recordRouter);
 app.use('/account', accountRouter);
 app.use('/absence', leaveRouter);

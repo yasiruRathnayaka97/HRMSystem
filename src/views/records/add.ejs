@@ -1,0 +1,581 @@
+<%- contentFor('body') %>
+<!-- Todo: Frontend Validation-->
+<!--
+
+
+
+-->
+<div class="row">
+  <div class="col-md-6">
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Personal Information</h3>
+
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+            <i class="fas fa-minus"></i></button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <label for="inputName">First Name</label>
+          <input type="text" id="inputName" pattern="[a-zA-z]+" required="required" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="inputName">Middle Name</label>
+          <input type="text" id="inputName" pattern="[a-zA-z]+" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="inputName">Last Name</label>
+          <input type="text" id="inputName" pattern="[a-zA-z]+" required="required" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="inputStatus">Gender</label>
+          <select class="form-control custom-select">
+            <option selected disabled>Select one</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="inputStatus">Marital Status</label>
+          <select class="form-control custom-select">
+            <option selected disabled>Select one</option>
+            <option>Married</option>
+            <option>Single</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Birthday</label>
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="far fa-calendar-alt"></i>
+              </span>
+            </div>
+            <input type="text" name="birthday" class="form-control float-right birtday" id="birthday">
+          </div>
+          <!-- /.input group -->
+        </div>
+
+        <div class="form-group">
+          <label for="customFile">Photo</label>
+
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="customFile">
+            <label class="custom-file-label" for="customFile">Choose a photo</label>
+          </div>
+        </div>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </div>
+  <div class="col-md-6">
+    <div class="card card-secondary">
+      <div class="card-header">
+        <h3 class="card-title">Contact Information</h3>
+
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+            <i class="fas fa-minus"></i></button>
+        </div>
+      </div>
+      <div class="card-body">
+
+        <div class="form-group">
+          <label for="inputName">Address Line1</label>
+          <input type="text" id="inputName" pattern="" required="required" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="inputName">Address Line2</label>
+          <input type="text" id="inputName" pattern="" required="required" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="inputName">City</label>
+          <input type="text" id="inputName" pattern="" required="required" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="inputName">Region</label>
+          <input type="text" id="inputName" pattern="" required="required" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="inputName">Country</label>
+          <input type="text" id="inputName" pattern="" required="required" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="inputName">Phone No</label>
+          <input type="text" id="inputName" pattern="\d{10,}" required="required" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="inputName">Additional Phone No</label>
+          <input type="text" id="inputName" pattern="\d{10,}" required="required" class="form-control">
+        </div>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </div>
+</div>
+<div class="row">
+  <% if (attributes.length > 0)  { %>
+  <div class="col-md-6">
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Other Employee Information</h3>
+
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+            <i class="fas fa-minus"></i></button>
+        </div>
+      </div>
+      <div class="card-body">
+
+        <% for (const attribute of attributes) { %>
+
+        <% if(attribute.type === 'select') {%>
+
+        <% } else { %>
+        <div class="form-group">
+          <label for="inputName"><%= attribute.name %></label>
+          <input required type="<%=attribute.type%>" name="<%=attribute.name%>" value="<%=attribute.default%>"
+            id="inputName" pattern="[a-zA-z]+" required="required" class="form-control">
+        </div>
+        <% } %>
+
+        <% } %>
+
+
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </div>
+  <% } %>
+  <div class="col-md-6">
+    <div class="card card-secondary">
+      <div class="card-header">
+        <h3 class="card-title">Emergency Contact Information</h3>
+
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+            <i class="fas fa-minus"></i></button>
+        </div>
+      </div>
+      <div class="card-body">
+        <button type="button" class="btn btn-block btn-outline-success" data-toggle="modal"
+          data-target="#modal-emergency">
+          <i class="fas fa-plus"></i> Add</button>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Contact Number</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="emergency-table-body">
+
+          </tbody>
+        </table>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Dependent Information</h3>
+
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+            <i class="fas fa-minus"></i></button>
+        </div>
+      </div>
+      <div class="card-body">
+        <button type="button" class="btn btn-block btn-outline-success" data-toggle="modal"
+          data-target="#modal-dependent">
+          <i class="fas fa-plus"></i> Add</button>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Relation</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="dependent-table-body">
+
+          </tbody>
+        </table>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </div>
+  <div class="col-md-6">
+    <div class="card card-secondary">
+      <div class="card-header">
+        <h3 class="card-title">Employement Information</h3>
+
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+            <i class="fas fa-minus"></i></button>
+        </div>
+      </div>
+      <div class="card-body">
+
+        <div class="form-group">
+          <label>Branch</label>
+          <select disabled class="form-control select2bs4" style="width: 100%;">
+            <option selected="selected">Default</option>
+          </select>
+        </div>
+
+
+        <div class="form-group">
+          <label>Department</label>
+          <select class="form-control select2bs4" style="width: 100%;">
+            <option selected="selected">Alabama</option>
+            <option>Alaska</option>
+            <option>California</option>
+            <option>Delaware</option>
+            <option>Tennessee</option>
+            <option>Texas</option>
+            <option>Washington</option>
+          </select>
+        </div>
+
+
+        <div class="form-group">
+          <label>Job Title</label>
+          <select class="form-control select2bs4" style="width: 100%;">
+            <option selected="selected">Alabama</option>
+            <option>Alaska</option>
+            <option>California</option>
+            <option>Delaware</option>
+            <option>Tennessee</option>
+            <option>Texas</option>
+            <option>Washington</option>
+          </select>
+        </div>
+
+
+        <div class="form-group">
+          <label>Paygrade</label>
+          <select class="form-control select2bs4" style="width: 100%;">
+            <option selected="selected">Alabama</option>
+            <option>Alaska</option>
+            <option>California</option>
+            <option>Delaware</option>
+            <option>Tennessee</option>
+            <option>Texas</option>
+            <option>Washington</option>
+          </select>
+        </div>
+
+
+        <div class="form-group">
+          <label>Employement Type</label>
+          <select class="form-control select2bs4" style="width: 100%;">
+            <option selected="selected">Alabama</option>
+            <option>Alaska</option>
+            <option>California</option>
+            <option>Delaware</option>
+            <option>Tennessee</option>
+            <option>Texas</option>
+            <option>Washington</option>
+          </select>
+        </div>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <!-- <a href="#" class="btn btn-secondary">Cancel</a> -->
+    <input type="submit" value="Create Record" class="btn btn-success float-right">
+  </div>
+</div>
+
+
+<div class="modal fade" id="modal-dependent">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Default Modal</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="inputName">First Name</label>
+          <input type="text" id="dependentFirstName" pattern="[a-zA-z]+" required="required" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="inputName">Middle Name</label>
+          <input type="text" id="dependentMiddleName" pattern="[a-zA-z]+" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="inputName">Last Name</label>
+          <input type="text" id="dependentLastName" pattern="[a-zA-z]+" required="required" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="inputName">Relation</label>
+          <input type="text" id="dependentRelation" pattern="[a-zA-z]+" required="required" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label>Birthday</label>
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="far fa-calendar-alt"></i>
+              </span>
+            </div>
+            <input type="text" class="form-control float-right birthday" id="dependentBirthday">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="saveDependent()" id="dependentAdd">Add</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<div class="modal fade" id="modal-emergency">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Default Modal</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="inputName">Contact Name</label>
+          <input type="text" id="emergencyContactName" required="required" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="inputName">Phone No</label>
+          <input type="text" id="emergencyContactNo" pattern="\d{10,}" required="required" class="form-control">
+        </div>
+
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="saveEmergency()" id="emergencyAdd" dismiss="modal">Save
+          changes</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+v>
+
+<%-contentFor('scripts')%>
+<script src="/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="/plugins/select2/js/select2.full.min.js"></script>
+
+<script>
+  // Todo: Improve
+  window.employeeData = {
+    emergency: [],
+    dependent: [],
+  };
+
+  window.selectedEmergency = null;
+
+  $(function () {
+    $('.birthday').daterangepicker({
+      singleDatePicker: true,
+      showDropdowns: true,
+      minYear: 1901,
+      maxYear: parseInt(moment().subtract(18, 'y').format('YYYY'), 10),
+      // isInvalidDate: (date) => (moment().diff(date,'years') <= 0),
+    });
+    $('.select2bs4').select2({ theme: 'bootstrap4' });
+
+    $('#modal-emergency').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var entity = button.data('emergency') // Extract info from data-* attributes
+
+      if ((+entity) >= 0) {
+        $('#emergencyContactName').val(window.employeeData.emergency[entity].name);
+        $('#emergencyContactNo').val(window.employeeData.emergency[entity].contactNo);
+        $('#emergencyAdd').data('index', +entity);
+        console.log($('#emergencyAdd').data('index'));
+      }
+    });
+
+    $('#modal-emergency ').on('hide.bs.modal', function (event) {
+      $('#emergencyAdd').data('index', '');
+    });
+
+    $('#modal-dependent').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var entity = button.data('dependent') // Extract info from data-* attributes
+
+      if ((+entity) >= 0) {
+        $('#dependentFirstName').val(window.employeeData.dependent[entity].firstName);
+        $('#dependentLastName').val(window.employeeData.dependent[entity].lastName);
+        $('#dependentMiddleName').val(window.employeeData.dependent[entity].middleName);
+        $('#dependentRelation').val(window.employeeData.dependent[entity].relation);
+        $('#dependentBirthday').val(window.employeeData.dependent[entity].birthday);
+
+        $('#dependentAdd').data('index', +entity);
+        console.log($('#dependentAdd').data('index'));
+      }
+    });
+
+    $('#modal-dependent ').on('hide.bs.modal', function (event) {
+      $('#dependentAdd').data('index', '');
+    });
+  });
+
+  function saveEmergency() {
+
+    // Todo:Validate
+    const selected = $('#emergencyAdd').data('index');
+
+    const name = $('#emergencyContactName');
+    const no = $('#emergencyContactNo');
+
+    if (!(+selected >= 0)) {
+      const index = window.employeeData.emergency.length;
+      const html = ` <tr id="emergency-${index}"">
+              <td>${name.val()}</td>
+              <td>${no.val()}</td>
+              <td class="text-right py-0 align-middle">
+                <div class="btn-group btn-group-sm">
+                  <a href="#" data-emergency="${index}" data-target="#modal-emergency" data-toggle="modal" class="btn btn-info"><i class="fas fa-edit"></i></a>
+                  <a href="#" onclick="deleteEntity(event, 'emergency', ${index})" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                </div>
+              </td>
+            </tr>`;
+      $('#emergency-table-body').append(html);
+      window.employeeData.emergency.push(
+        {
+          name: name.val(),
+          contactNo: no.val()
+        }
+      );
+    } else {
+      $(`#emergency-${selected}`).children().first().text(name.val());
+      $(`#emergency-${selected}`).children().eq(1).text(no.val());
+
+      window.employeeData.emergency[selected].name = name.val();
+      window.employeeData.emergency[selected].contactNo = no.val();
+
+    }
+    // Clear
+    name.val('');
+    no.val('');
+    $('#modal-emergency').modal('hide');
+  }
+
+
+
+
+  function saveDependent() {
+
+    // Todo:Validate
+    const selected = $('#dependentAdd').data('index');
+
+    const firstName = $('#dependentFirstName');
+    const lastName = $('#dependentLastName');
+    const middleName = $('#dependentMiddleName');
+    const relation = $('#dependentRelation');
+    const birthday = $('#dependentBirthday');
+
+    if (!(+selected >= 0)) {
+      const index = window.employeeData.dependent.length;
+      const html = ` <tr id="dependent-${index}"">
+        <td>${firstName.val()} ${lastName.val()}</td>
+        <td>${relation.val()}</td>
+        <td class="text-right py-0 align-middle">
+          <div class="btn-group btn-group-sm">
+            <a href="#" data-dependent="${index}" data-target="#modal-dependent" data-toggle="modal" class="btn btn-info"><i class="fas fa-edit"></i></a>
+            <a href="#" onclick="deleteEntity(event, 'dependent', ${index})" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+          </div>
+        </td>
+      </tr>`;
+      $('#dependent-table-body').append(html);
+      window.employeeData.dependent.push(
+        {
+          firstName: $('#dependentFirstName').val(),
+          lastName: $('#dependentLastName').val(),
+          middleName: $('#dependentMiddleName').val(),
+          relation: $('#dependentRelation').val(),
+          birthday: $('#dependentBirthday').val(),
+
+        }
+      );
+    } else {
+      $(`#dependent-${selected}`).children().first().text(`${firstName.val()} ${lastName.val()}`);
+      $(`#dependent-${selected}`).children().eq(1).text(relation.val());
+
+      window.employeeData.dependent[selected] = {
+        firstName: $('#dependentFirstName').val(),
+        lastName: $('#dependentLastName').val(),
+        middleName: $('#dependentMiddleName').val(),
+        relation: $('#dependentRelation').val(),
+        birthday: $('#dependentBirthday').val(),
+
+      };
+
+    }
+    // Clear
+    $('#dependentFirstName').val('');
+    $('#dependentLastName').val('');
+    $('#dependentMiddleName').val('');
+    $('#dependentRelation').val('');
+    $('#dependentBirthday').val('');
+    $('#modal-dependent').modal('hide');
+  }
+
+
+
+  function deleteEntity(event, type, index) {
+    // Delete html
+    const el = $(`#${type}-${index}`).remove();
+    // Delete object
+    window.employeeData[`${type}`].splice(index, 1);
+    event.preventDefault();
+  }
+
+</script>
+
+
+<%-contentFor('styles')%>
+<link rel="stylesheet" href="/plugins/daterangepicker/daterangepicker.css">
+<link rel="stylesheet" href="/plugins/select2/css/select2.min.css">
+<link rel="stylesheet" href="/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
