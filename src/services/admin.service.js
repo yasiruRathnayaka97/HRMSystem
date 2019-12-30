@@ -11,16 +11,18 @@ class AdminService {
     this.db = db;
   }
 
-  async addJobTitle(job) {
+  async addJobTitle(job,salary) {
 
     const jobRepo = new JobTitleRepository(this.db);
 
     await jobrepo.create({
-      job
+      job,
+      salary
     });
 
     return new JobTitle(
-        job
+        job,
+        salary
     );
   }
   async removeJobTitle(job) {
