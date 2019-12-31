@@ -16,7 +16,7 @@ class AdminService {
     const jobRepo = new JobTitleRepository(this.db);
 
     await jobrepo.create({
-      job,
+      title:job,
       salary
     });
 
