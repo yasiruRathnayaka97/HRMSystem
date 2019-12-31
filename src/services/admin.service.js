@@ -30,7 +30,7 @@ class AdminService {
     const jobRepo = new JobTitleRepository(this.db);
 
     await jobrepo.delete({
-      job
+      title:job
     });
   }
 }
