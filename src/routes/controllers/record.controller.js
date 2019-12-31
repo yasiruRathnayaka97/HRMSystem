@@ -106,6 +106,10 @@ class RecordController {
         .then((record) => res.json({id: record.id}))
         .catch((e)=>res.json({error: e}));
   }
+  async delete(id){
+      const recordService= new EmployeeRecordService(db);
+      await recordService.delete(id);
+  }
 }
 
 module.exports = RecordController;

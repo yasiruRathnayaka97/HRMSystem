@@ -12,6 +12,7 @@ const indexRouter = require('./routes/index');
 const recordRouter = require('./routes/record');
 const accountRouter = require('./routes/account');
 const leaveRouter = require('./routes/leave');
+const roleAndPermission=require('./routes/roleAndPermission');
 const app = express();
 
 // view engine setup
@@ -26,6 +27,8 @@ app.use('/', indexRouter);
 app.use('/record', recordRouter);
 app.use('/account', accountRouter);
 app.use('/absence', leaveRouter);
+app.use('/roleAndPermission',roleAndPermission);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

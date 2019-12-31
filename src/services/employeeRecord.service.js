@@ -80,6 +80,11 @@ class EmployeeRecordService {
       // Throw error
     }
   }
+  //this is a procedeuralimplementation
+  async delete(id){
+    const recordRepo = new EmployeeRecordRepository(this.db);
+    recordRepo.deleteExistence(id);
+  }
 }
 
 module.exports = EmployeeRecordService;

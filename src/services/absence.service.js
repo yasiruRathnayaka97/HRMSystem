@@ -75,17 +75,33 @@ class AbsenceService {
     }
 
   }
-  async getLeaveInfo(supervisorId){
-      availableLeave=getPaygradeLeaveCount(leaveId) - getTakenLeavesValue(leaveId);
-              
-      //TODO IMPLEMENT LEAVE INFO RETRIEVE
-      return leveInfo;
+  async getLeaveInfoAll(supervisorId){
+  const absenceRepo = new AbsenceRepository(this.db);
+      return await leveInfoAll;
   }
-  async getLeaveStatus(employeeRecordId){
-    var attr="status";
+  async getLeaveInfo(employeeRecordId){
     const absenceRepo = new AbsenceRepository(this.db);
-    return await absenceRepo.findOneByOne(attr,employeeRecordId);
+    return await absenceRepo.getLeaveInfo(employeeRecordId);
 
+  }
+  async isAvailableLeave(id,type){
+    const absenceRepo = new AbsenceRepository(this.db);
+    return await absenceRepo.isAvailableLeave(id,type);
+  }
+
+  async applyLeave(id,type,from,to,comment){
+    const absenceRepo = new AbsenceRepository(this.db);
+    var stmt=await this.isAvailableLeave(id,type);
+    if (stmt==true){
+    var stmt=await absenceRepo.applyLeave(id,type,from,to,comment);
+    if (stmt=='err'){
+    return "can not apply 2 leaves for same period";
+    }
+    return "Request Pending.";
+    }
+    else{
+      return "No left Leaves for This type.";
+    }
   }
 }
 
