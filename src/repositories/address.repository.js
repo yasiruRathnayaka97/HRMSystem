@@ -49,6 +49,20 @@ class AddressRepository extends BaseRepository {
     return await this.db.execute(`DELETE FROM employee_record_has_address WHERE 
     employee_record_id = ${employee} AND address_id =${address};`);
   }
+
+  /**
+   * 
+   * @param {*} recordId 
+   */
+  async getAddresses(recordId) {
+    return (await this.db.execute(`SELECT * FROM 
+    address JOIN city on address.city_id = city.id 
+    NATURAL JOIN region
+    JOIN employee_record_has_address eha ON address.id = eha.address_id 
+    WHERE eha.employee_record_id = ?
+    `,
+    [recordId]))[0];
+  }
 }
 
 module.exports = AddressRepository;

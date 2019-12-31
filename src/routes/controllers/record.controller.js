@@ -3,7 +3,7 @@ const EmployeeRecordService = require('../../services/employeeRecord.service');
 const CustomAttributeService =
   require('../../services/customAttribute.service');
 const AddressRepository = require('../../repositories/address.repository');
-const camelCase = require('lodash');
+const {camelCase} = require('lodash');
 const DependentRepository = require('../../repositories/dependent.repository');
 /**
  *
@@ -32,6 +32,7 @@ class RecordController {
         photo,
         salary,
         departmentId,
+        sex,
       } = req.body;
       // Extract custom attributes from request
       const attribService = new CustomAttributeService(db);
@@ -59,6 +60,7 @@ class RecordController {
         photo,
         salary,
         departmentId,
+        sex,
       },
       custom,
       );
@@ -92,7 +94,7 @@ class RecordController {
             firstName: dependent.firstName,
             middleName: dependent.middleName || '',
             lastName: dependent.lastName,
-            birthday: dependent.birthday,
+            birthdate: dependent.birthday,
             relation: dependent.relation,
             employeeRecordId: record.id,
           });
@@ -106,9 +108,22 @@ class RecordController {
         .then((record) => res.json({id: record.id}))
         .catch((e)=>res.json({error: e}));
   }
+
   async delete(id){
       const recordService= new EmployeeRecordService(db);
       await recordService.delete(id);
+
+
+  /**
+   *
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
+   */
+  static async view(req, res, next) {
+    const recordService = new EmployeeRecordService(db);
+    res.json((await recordService.getById(req.params.id)));
+
   }
 }
 

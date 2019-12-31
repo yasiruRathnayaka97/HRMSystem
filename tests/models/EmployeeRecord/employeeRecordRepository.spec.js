@@ -79,6 +79,6 @@ afterAll(async (done)=>{
   // await pool.execute(`DELETE from region where region= 'test_region'`);
   // await pool.execute(`INSERT INTO baseRepoTest (name) VALUES('entity2');`);
   await pool.execute(`DELETE from employee_record where id = ${id}`);
-  await pool.execute(`SET FOREIGN_KEY_CHECKS=0;`);
+  await pool.execute(`SET FOREIGN_KEY_CHECKS=1;`);
   done();
 });

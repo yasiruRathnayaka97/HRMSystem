@@ -3,7 +3,7 @@ const CustomAttributeRepository = require('./customAttribute.repository');
 const valueColumns = require('../helpers/customAttribute.helper').valueColumns;
 const prepareForInsert =
   require('../helpers/sql.helper').prepareForInsert;
-const camelCase = require('lodash').camelCase;
+const {camelCase} = require('lodash');
 
 /**
  * Custom Attribute Repository
